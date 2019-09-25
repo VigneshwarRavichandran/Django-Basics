@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login</title>
+	<title>Register</title>
 	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -10,9 +10,8 @@
 </head>
 <body>
 	<div class="container">
-	  <h3>User Login</h3>
+	  <h3>User Register</h3>
 		<form method="post">
-			{% csrf_token %}
 	    <div class="form-group">
 	      <label>Username</label>
 	      <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
@@ -21,9 +20,14 @@
 	      <label>Password</label>
 	      <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
 	    </div>
-	    {% if error %}
-	    	<h6 style="color:red">{{ error }}</h6>
-	    {% endif %}
+	    <div class="form-group">
+	      <label>Firstname</label>
+	      <input type="text" class="form-control" id="firstname" placeholder="Enter firstname" name="firstname">
+	    </div>
+	    <div class="form-group">
+	      <label>Lastname</label>
+	      <input type="text" class="form-control" id="lastname" placeholder="Enter lastname" name="lastname">
+	    </div>
 	    <button type="submit" class="btn btn-default">Login</button>
 	  </form>
 	</div>
