@@ -1,4 +1,4 @@
-from .models import *
+from .models import *	
 
 def user_exists(username):
 	user = Users.objects.filter(username=username)
@@ -9,5 +9,5 @@ def user_exists(username):
 def valid_credentials(username, password):
 	user = Users.objects.get(username=username)
 	if user.password == password:
-		return True
+		return user
 	return False

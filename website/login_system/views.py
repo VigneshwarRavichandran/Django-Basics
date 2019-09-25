@@ -13,14 +13,17 @@ def login(request):
 		password = request.POST.get('password')
 		error = None
 		if user_exists(username):
-			if valid_credentials(username, password):
-				error = 'Success'
+			valid_user = valid_credentials(username, password)
+			if valid_user:
+				context['username'] = valid_user.username
+				context['user_id'] = valid_user.id
+				return render(request, 'user.html', context)
 			else:
 				error = 'Invalid password'
 		else:
 			error = 'Invalid username'
 		context['error'] = error
-		return render(request, 'user.html', context)
+		return render(request, 'login.html', context)
 	return render(request, 'login.html', context)
 
 def register(request):
