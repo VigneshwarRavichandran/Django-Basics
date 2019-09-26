@@ -5,8 +5,6 @@ from .helper import *
 def login(request):
 	context = {
 		'error' : None,
-		'username' : None,
-		'user_id' : None
 	}
 	if request.method == 'POST':
 		username = request.POST.get('username')
@@ -15,9 +13,8 @@ def login(request):
 		if user_exists(username):
 			valid_user = valid_credentials(username, password)
 			if valid_user:
-				context['username'] = valid_user.username
-				context['user_id'] = valid_user.id
-				return render(request, 'user.html', context)
+				userid = valid_user.id
+				return redirect(user, userid)
 			else:
 				error = 'Invalid password'
 		else:
@@ -42,5 +39,12 @@ def register(request):
 		return render(request, 'register.html', context)
 	return render(request, 'register.html', context)
 
-def user(request):
-	return HttpResponse('User')
+def user(request, userid):
+	context = {
+	'userid' : userid
+	}
+	user_details = get_user_details(userid)
+	context['username'] = user_details.user.username
+	context['firstname'] = user_details.firstname
+	context['lastname'] = user_details.lastname
+	return render(request, 'user.html', context)

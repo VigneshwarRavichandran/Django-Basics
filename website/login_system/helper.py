@@ -17,3 +17,7 @@ def create_user(username, password, firstname, lastname):
 	user.save()
 	user_details = UserDetails(firstname=firstname, lastname=lastname, user_id=user.id)
 	user_details.save()
+
+def get_user_details(userid):
+	user_details = UserDetails.objects.get(user_id=userid)
+	return user_details
