@@ -12,6 +12,7 @@
 	<div class="container">
 	  <h3>User Register</h3>
 		<form method="post">
+			{% csrf_token %}
 	    <div class="form-group">
 	      <label>Username</label>
 	      <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
@@ -28,7 +29,12 @@
 	      <label>Lastname</label>
 	      <input type="text" class="form-control" id="lastname" placeholder="Enter lastname" name="lastname">
 	    </div>
-	    <button type="submit" class="btn btn-default">Login</button>
+	    <div class="form-group">
+	      {% if error %}
+		    	<h6 style="color:red">{{ error }}</h6>
+		    {% endif %}
+	    </div>
+	    <button type="submit" class="btn btn-default">Register</button>
 	  </form>
 	</div>
 </body>

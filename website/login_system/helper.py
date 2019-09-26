@@ -11,3 +11,9 @@ def valid_credentials(username, password):
 	if user.password == password:
 		return user
 	return False
+
+def create_user(username, password, firstname, lastname):
+	user = Users(username=username, password=password)
+	user.save()
+	user_details = UserDetails(firstname=firstname, lastname=lastname, user_id=user.id)
+	user_details.save()

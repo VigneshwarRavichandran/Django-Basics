@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .helper import *
 
@@ -27,11 +27,20 @@ def login(request):
 	return render(request, 'login.html', context)
 
 def register(request):
+	context = {
+		'error' : None,
+	}
 	if request.method == 'POST':
 		username = request.POST.get('username')
 		password = request.POST.get('password')
-		return HttpResponse('username {0} password {1}'.format(username, password))
-	return render(request, 'register.html')
+		firstname = request.POST.get('firstname')
+		lastname = request.POST.get('lastname')
+		if not user_exists(username):
+			create_user(username, password, firstname, lastname)
+			return redirect(login)
+		context['error'] = 'Username already exists'
+		return render(request, 'register.html', context)
+	return render(request, 'register.html', context)
 
 def user(request):
 	return HttpResponse('User')
